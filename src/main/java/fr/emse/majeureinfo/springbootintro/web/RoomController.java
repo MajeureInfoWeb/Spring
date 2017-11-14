@@ -21,6 +21,7 @@ public class RoomController {
     }
 
     @GetMapping
+  
     public List<RoomDto> list() {
         return roomDao.findAll().stream().map(RoomDto::new).collect(Collectors.toList());
     }
@@ -32,12 +33,21 @@ public class RoomController {
         return new RoomDto(myRoom) ; // On repasse le DTO en retour :)
     }
 
+    @GetMapping(value = "/{roomId}/content")
+    public RoomDto get(@PathVariable long roomId) {
+        return new RoomDto(roomDao.findOne(roomId)); // On crée une nouvelle instance de RoomDto avec l'id trouvé
+    }
 
+    @GetMapping(value = "/{roomId}/switch")
+    public RoomDto switchLight(@PathVariable Long roomId) {
+        Room myRoom = roomDao.findOne(roomId) ; // On récupère la room
+        myRoom.switchLight(); // On switch
+        return new RoomDto(myRoom) ; // On repasse le DTO en retour :)
 
+    }
 }
 
 /* Méthodes à ajouter :
-    .get(roomid) sur api/rooms/{id} ou api/rooms/{id}/content
 
     .switchLight(roomid) sur api/room/{id]/switch.light
 

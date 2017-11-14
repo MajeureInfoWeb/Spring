@@ -54,6 +54,15 @@ public class Room {
             noise.setStatus(Status.ON);
         }
     }
+  
+  public void switchLight() {
+        if (light.getStatus() == Status.ON){
+            light.setStatus(Status.OFF) ;
+        }
+        else {
+            light.setStatus(Status.OFF) ;
+        }
+    }
 
     /**
      * The Light of a room
