@@ -43,7 +43,7 @@ public class RoomController {
         return new RoomDto(roomDao.findOne(roomId)); // On crée une nouvelle instance de RoomDto avec l'id trouvé
     }
 
-    @GetMapping(value = "/{roomId}/switch")
+    @PostMapping(value = "/{roomId}/switchLight")
     public RoomDto switchLight(@PathVariable Long roomId) {
         Room myRoom = roomDao.findOne(roomId) ; // On récupère la room
         myRoom.switchLight(); // On switch
