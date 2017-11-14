@@ -1,7 +1,9 @@
 package fr.emse.majeureinfo.springbootintro.web;
 
 import fr.emse.majeureinfo.springbootintro.dao.RoomDao;
+import fr.emse.majeureinfo.springbootintro.model.Room;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,11 +24,18 @@ public class RoomController {
     }
 
     @GetMapping
-    /*public String list() {
-        return "coucou";
-    */public List<RoomDto> list() {
+    public List<RoomDto> list() {
         return roomDao.findAll().stream().map(RoomDto::new).collect(Collectors.toList());
     }
+
+    @GetMapping(value = "/{roomId}/switchRinger")
+    public RoomDto switchRinger(@PathVariable Long roomId) {
+        Room myRoom = roomDao.findOne(roomId) ; // On récupère la room
+        myRoom.switchRinger(); // On switch
+        return new RoomDto(myRoom) ; // On repasse le DTO en retour :)
+    }
+
+
 
 }
 
