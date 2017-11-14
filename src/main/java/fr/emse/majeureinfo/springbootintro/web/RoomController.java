@@ -21,11 +21,16 @@ public class RoomController {
     }
 
     @GetMapping
-    /*public String list() {
-        return "coucou";
-    */
+  
     public List<RoomDto> list() {
         return roomDao.findAll().stream().map(RoomDto::new).collect(Collectors.toList());
+    }
+
+    @PostMapping(value = "/{roomId}/switchRinger") //On travaille en post pour pouvoir changer dans la BDD
+    public RoomDto switchRinger(@PathVariable Long roomId) {
+        Room myRoom = roomDao.findOne(roomId) ; // On récupère la room
+        myRoom.switchRinger(); // On switch
+        return new RoomDto(myRoom) ; // On repasse le DTO en retour :)
     }
 
     @GetMapping(value = "/{roomId}/content")
