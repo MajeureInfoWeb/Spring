@@ -29,3 +29,16 @@ public class RoomController {
     }
 
 }
+
+/* Méthodes à ajouter :
+    .get(roomid) sur api/rooms/{id} ou api/rooms/{id}/content
+
+    .switchLight(roomid) sur api/room/{id]/switch.light
+
+    .switchRinger(roomid) sur api/rooms/{id]/switch.ringer
+
+    listWithOnLights() sur api/rooms/list-with-on-lights
+
+    et du coup, il aura fallu aussi un RoomDaoImpl findRoomsWithOnLights()
+
+ */
