@@ -49,12 +49,5 @@ public class Noise {
         this.status = status;
     }
 
-    /*public void switchNoise() {
-        if (status == Status.ON){
-            this.status = Status.OFF ;
-        }
-        else {
-            this.status = Status.ON;
-        }
-    }*/
+    
 }
