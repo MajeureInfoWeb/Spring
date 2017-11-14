@@ -28,6 +28,11 @@ public class RoomController {
         return roomDao.findAll().stream().map(RoomDto::new).collect(Collectors.toList());
     }
 
+    @GetMapping(value = "/On")
+    public List<RoomDto> listWithOnLight() {
+        return roomDao.findRoomsWithOnLight().stream().map(RoomDto::new).collect(Collectors.toList());
+    }
+
 }
 
 /* Méthodes à ajouter :
