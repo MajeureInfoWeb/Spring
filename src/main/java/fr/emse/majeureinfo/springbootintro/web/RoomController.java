@@ -1,6 +1,7 @@
 package fr.emse.majeureinfo.springbootintro.web;
 
 import fr.emse.majeureinfo.springbootintro.dao.RoomDao;
+import fr.emse.majeureinfo.springbootintro.model.Room;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -27,11 +28,18 @@ public class RoomController {
         return roomDao.findAll().stream().map(RoomDto::new).collect(Collectors.toList());
     }
 
-    @GetMapping(value = "/{id}/content")
-    public RoomDto get(@PathVariable long id) {
-        return new RoomDto(roomDao.findOne(id)); // On crée une nouvelle instance de RoomDto avec l'id trouvé
+    @GetMapping(value = "/{roomId}/content")
+    public RoomDto get(@PathVariable long roomId) {
+        return new RoomDto(roomDao.findOne(roomId)); // On crée une nouvelle instance de RoomDto avec l'id trouvé
     }
 
+    @GetMapping(value = "/{roomId}/switch")
+    public RoomDto switchLight(@PathVariable Long roomId) {
+        Room myRoom = roomDao.findOne(roomId) ; // On récupère la room
+        myRoom.switchLight(); // On switch
+        return new RoomDto(myRoom) ; // On repasse le DTO en retour :)
+
+    }
 }
 
 /* Méthodes à ajouter :
