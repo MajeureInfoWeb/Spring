@@ -1,9 +1,8 @@
 package fr.emse.majeureinfo.springbootintro.web;
 
 import fr.emse.majeureinfo.springbootintro.dao.RoomDao;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import fr.emse.majeureinfo.springbootintro.model.Room;
+import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -22,10 +21,33 @@ public class RoomController {
     }
 
     @GetMapping
-    /*public String list() {
-        return "coucou";
-    */public List<RoomDto> list() {
+  
+    public List<RoomDto> list() {
         return roomDao.findAll().stream().map(RoomDto::new).collect(Collectors.toList());
     }
 
+    @GetMapping(value = "/On")
+    public List<RoomDto> listWithOnLight() {
+        return roomDao.findRoomsWithOnLight().stream().map(RoomDto::new).collect(Collectors.toList());
+    }
+
+    @PostMapping(value = "/{roomId}/switchRinger") //On travaille en post pour pouvoir changer dans la BDD
+    public RoomDto switchRinger(@PathVariable Long roomId) {
+        Room myRoom = roomDao.findOne(roomId) ; // On récupère la room
+        myRoom.switchRinger(); // On switch
+        return new RoomDto(myRoom) ; // On repasse le DTO en retour :)
+    }
+
+    @GetMapping(value = "/{roomId}/content")
+    public RoomDto get(@PathVariable long roomId) {
+        return new RoomDto(roomDao.findOne(roomId)); // On crée une nouvelle instance de RoomDto avec l'id trouvé
+    }
+
+    @PostMapping(value = "/{roomId}/switchLight")
+    public RoomDto switchLight(@PathVariable Long roomId) {
+        Room myRoom = roomDao.findOne(roomId) ; // On récupère la room
+        myRoom.switchLight(); // On switch
+        return new RoomDto(myRoom) ; // On repasse le DTO en retour :)
+
+    }
 }

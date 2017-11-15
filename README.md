@@ -1,5 +1,4 @@
-# Spring
-Application pour la majeure
 
-L'adresse Heroku est :
-https://pure-dawn-33954.herokuapp.com
+Projet Majeure Info
+
+The Heroku link is : https://mighty-plains-77473.herokuapp.com/

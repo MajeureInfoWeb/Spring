@@ -48,4 +48,6 @@ public class Noise {
     public void setStatus(Status status) {
         this.status = status;
     }
+
+    
 }
