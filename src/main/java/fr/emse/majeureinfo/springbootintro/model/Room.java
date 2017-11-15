@@ -60,7 +60,7 @@ public class Room {
             light.setStatus(Status.OFF) ;
         }
         else {
-            light.setStatus(Status.OFF) ;
+            light.setStatus(Status.ON) ;
         }
     }
 
