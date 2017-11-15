@@ -58,4 +58,11 @@ public class RoomController {
         return new RoomDto(myRoom) ; // On repasse le DTO en retour :)
 
     }
+
+    @PostMapping(value = "/{roomId}/switchLightl") //On travaille en post et cette fois on fait une liste
+    public List<RoomDto> switchLightl(@PathVariable Long roomId) {
+        Room myRoom = roomDao.findOne(roomId) ; // On récupère la room a changer
+        myRoom.switchLight(); // On switch
+        return roomDao.findAll().stream().map(RoomDto::new).collect(Collectors.toList()); // On repasse tout le DTO en retour :)
+    }
 }
