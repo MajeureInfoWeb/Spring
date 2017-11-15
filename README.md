@@ -1,4 +1,4 @@
 # Spring
 Projet Majeure Info
 
-The Heroku link is : https://pure-dawn-33954.herokuapp.com
+The Heroku link is : https://mighty-plains-77473.herokuapp.com/api/rooms/
