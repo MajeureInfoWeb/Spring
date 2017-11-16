@@ -40,7 +40,9 @@ public class LightDaoCustomTest {
 
     protected static final DbSetupTracker TRACKER = new DbSetupTracker();
 
-    private static final Operation DELETE_ALL = DeleteAll.from("light");
+    //Attention a bien effacer toutes les tables et dans le bon ordre !
+    //Il faudra sans doute modifier ici quand on aura des bâtiments
+    private static final Operation DELETE_ALL = DeleteAll.from("room", "light", "noise");
 
     protected void dbSetup(Operation operation) {
         DbSetup setup = new DbSetup(new DataSourceDestination(dataSource),
@@ -54,7 +56,7 @@ public class LightDaoCustomTest {
                 Insert.into("LIGHT")
                         .withDefaultValue("status", Status.ON)
                         .columns("id", "level")
-                        .values(1L, 22)
+                        .values(1L, 2)
                         .build();
         dbSetup(light);
     }
