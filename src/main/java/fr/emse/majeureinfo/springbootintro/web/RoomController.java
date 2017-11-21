@@ -21,7 +21,6 @@ public class RoomController {
     }
 
     @GetMapping
-  
     public List<RoomDto> list() {
         return roomDao.findAll().stream().map(RoomDto::new).collect(Collectors.toList());
     }
