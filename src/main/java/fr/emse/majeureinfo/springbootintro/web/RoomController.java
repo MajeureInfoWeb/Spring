@@ -21,7 +21,6 @@ public class RoomController {
     }
 
     @GetMapping
-  
     public List<RoomDto> list() {
         return roomDao.findAll().stream().map(RoomDto::new).collect(Collectors.toList());
     }
@@ -38,6 +37,14 @@ public class RoomController {
         return new RoomDto(myRoom) ; // On repasse le DTO en retour :)
     }
 
+    @PostMapping(value = "/{roomId}/switchRingerl") //On travaille en post et cette fois on fait une liste
+    public List<RoomDto> switchRingerl(@PathVariable Long roomId) {
+        Room myRoom = roomDao.findOne(roomId) ; // On récupère la room a changer
+        myRoom.switchRinger(); // On switch
+        return roomDao.findAll().stream().map(RoomDto::new).collect(Collectors.toList()); // On repasse tout le DTO en retour :)
+    }
+
+
     @GetMapping(value = "/{roomId}/content")
     public RoomDto get(@PathVariable long roomId) {
         return new RoomDto(roomDao.findOne(roomId)); // On crée une nouvelle instance de RoomDto avec l'id trouvé
@@ -49,5 +56,12 @@ public class RoomController {
         myRoom.switchLight(); // On switch
         return new RoomDto(myRoom) ; // On repasse le DTO en retour :)
 
+    }
+
+    @PostMapping(value = "/{roomId}/switchLightl") //On travaille en post et cette fois on fait une liste
+    public List<RoomDto> switchLightl(@PathVariable Long roomId) {
+        Room myRoom = roomDao.findOne(roomId) ; // On récupère la room a changer
+        myRoom.switchLight(); // On switch
+        return roomDao.findAll().stream().map(RoomDto::new).collect(Collectors.toList()); // On repasse tout le DTO en retour :)
     }
 }

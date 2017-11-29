@@ -21,18 +21,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.sql.DataSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
-
+import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @TestPropertySource("/test.properties")
 
-public class LightDaoCustomTest {
+public class RoomDaoCustomTest {
 
     @Autowired
-    private LightDao lightDao;
-
+    private RoomDao roomDao;
 
     @Qualifier("dataSource")
     @Autowired
@@ -40,13 +38,12 @@ public class LightDaoCustomTest {
 
     protected static final DbSetupTracker TRACKER = new DbSetupTracker();
 
-    //Attention a bien effacer toutes les tables et dans le bon ordre !
-    //Il faudra sans doute modifier ici quand on aura des bâtiments
     private static final Operation DELETE_ALL = DeleteAll.from("room", "light", "noise");
 
-    protected void dbSetup(Operation operation) {
+    // On va faire trois opérations d'entrée dans la BDD
+    protected void dbSetup(Operation operation, Operation operation2, Operation operation3) {
         DbSetup setup = new DbSetup(new DataSourceDestination(dataSource),
-                Operations.sequenceOf(DELETE_ALL, operation));
+                Operations.sequenceOf(DELETE_ALL, operation, operation2, operation3));
         TRACKER.launchIfNecessary(setup);
     }
 
@@ -54,17 +51,31 @@ public class LightDaoCustomTest {
     public void prepare() {
         Operation light =
                 Insert.into("LIGHT")
-                        .withDefaultValue("status", Status.ON)
+                        .withDefaultValue("status", Status.OFF)//on peut mettre ON ici et du coup il faudra avoir une taille de 1 plus loin mais tout marche !!
                         .columns("id", "level")
                         .values(1L, 2)
                         .build();
-        dbSetup(light);
+
+        Operation noise =
+                Insert.into("NOISE")
+                        .withDefaultValue("status", Status.ON)
+                        .columns("id", "level")
+                        .values(2L, 3)
+                        .build();
+
+        Operation room =
+                Insert.into("ROOM")
+                        //.withDefaultValue("status", Status.ON)
+                        .columns("id", "light_id", "noise_id")
+                        .values(3L, 1L, 2L) //On fait la BDD avec les bonnes clés primaires
+                        .build();
+        dbSetup(light, noise, room);
     }
 
     @Test
-    public void shouldFindOnLights() {
+    public void shouldfindRoomsWithOnLight() {
         TRACKER.skipNextLaunch();
-        assertThat(lightDao.findOnLights()).hasSize(1);
+        assertThat(roomDao.findRoomsWithOnLight()).hasSize(0);//ici on peut modifier ce qu'on veut que le test renvoie
     }
 
 }
