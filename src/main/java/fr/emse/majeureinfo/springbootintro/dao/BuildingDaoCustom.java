@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface BuildingDaoCustom {
 
-    public List<Building> findBuildingId(long a);
+    List<Building> findBuildingId(long a);
 }

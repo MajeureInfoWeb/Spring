@@ -64,14 +64,25 @@ public class Room {
         }
     }
 
-    public void switchOn() {
-        light.setStatus(Status.ON);
-        noise.setStatus(Status.ON);
+    public void switchLOn(){
+        light.setStatus((Status.ON));
     }
-
+    public void switchLOff(){
+        light.setStatus((Status.OFF));
+    }
+    public void switchROn(){
+        noise.setStatus((Status.ON));
+    }
+    public void switchROff(){
+        noise.setStatus((Status.OFF));
+    }
+    public void switchOn() {
+        switchLOn();
+        switchROn();
+    }
     public void switchOff() {
-        light.setStatus(Status.OFF);
-        noise.setStatus(Status.OFF);
+        switchLOff();
+        switchROff();
     }
 
     /**

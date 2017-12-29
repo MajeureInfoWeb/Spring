@@ -1,7 +1,5 @@
 package fr.emse.majeureinfo.springbootintro.model;
 
-import org.springframework.data.annotation.Persistent;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,18 +11,18 @@ public class Building {
     @Id
     @GeneratedValue
     private Long buildingid;
-    //un seul id est nécessaire
+    // un seul id est nécessaire
     // En revanche on est obligé d'avoir une table avec le nom des buildings
-    // et une autre table de join où on dit lesquels ont quels rooms
+    // et une autre table de join où on dit lesquels ont quelles rooms
 
     // Crée la colonne dans la BDD (mais ça marche même si je ne le mets pas)
     @Column(nullable = false)
     private String nom;
 
-    /**
-     * One of the Room of a building
+    /*
+     * One of The RoomS of A building
      */
-    // je sais pas trop ce que fait le mappedBy mais j'avais noté ça ...
+    // je sais pas trop ce que fait le mappedBy et ça marche sans
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Room> rooms;
 
@@ -39,21 +37,32 @@ public class Building {
         this.nom = nom;
     }
 
+    // Il m'a proposé de condenser mes boucles, j'ai dit oui ! c'est joli aussi :)
     public void switchAllOn() {
-
-        for (int i = 0 ; i < this.rooms.size() ; i ++){
-
-            this.rooms.get(i).switchOn();
-        }
+        for (Room room : this.rooms) room.switchOn();
     }
-
     public void switchAllOff() {
+        for (Room room : this.rooms) room.switchOff();
+    }
 
+    // Le détail de ma pensée est ici
+    public void switchLOff() {
+        for (int i = 0 ; i < this.rooms.size() ; i ++) this.rooms.get(i).switchLOff();
+    }
+
+    public void switchROff() {
         for (int i = 0 ; i < this.rooms.size() ; i ++){
-
-            this.rooms.get(i).switchOff();
+            this.rooms.get(i).switchROff();
         }
     }
+
+    public void switchLOn() {
+        for (Room room : this.rooms) room.switchLOn();
+    }
+    public void switchROn() {
+        for (Room room : this.rooms) room.switchROn();
+    }
+
 
     public Long getBuildingId() {
         return this.buildingid;

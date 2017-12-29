@@ -5,6 +5,6 @@ import fr.emse.majeureinfo.springbootintro.model.Light;
 import java.util.List;
 
 public interface LightDaoCustom {
-   public List<Light> findOnLights();
+   List<Light> findOnLights();   // public is redundant for an interface ^^'
 
 }
