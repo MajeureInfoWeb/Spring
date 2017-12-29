@@ -15,6 +15,8 @@ public class BuildingDaoImpl implements BuildingDaoCustom {
     private EntityManager em;
 
     @Override
+    // Fonction pour récupérer un Building avec son Id.
+    // La requête fonctionne comme pour les lights sauf que cette fois, il y a un paramètre, l'Id du Building
     public List<Building> findBuildingId(long a) {
         String jpql = "select lt from Building lt where lt.buildingid = :value";
         TypedQuery<Building> query = em.createQuery(jpql, Building.class);

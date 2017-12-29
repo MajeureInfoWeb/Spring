@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @SuppressWarnings("serial")
-@Table(name="Building")
+@Table(name="BUILDING")
 public class Building {
 
     @Id
