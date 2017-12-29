@@ -32,6 +32,7 @@ public class BuildingController {
     @GetMapping(value = "/{buildingId}/content")
     public BuildingDto get(@PathVariable long buildingId) {
         return new BuildingDto(buildingDao.findOne(buildingId)); // On crée une nouvelle instance de BuildingDto avec l'id trouvé
+        // ouais alors actuellement en fait, j'ai 5 buildings
     }
 
 }

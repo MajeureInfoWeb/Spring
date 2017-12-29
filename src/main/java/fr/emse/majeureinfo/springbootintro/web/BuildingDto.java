@@ -7,20 +7,20 @@ import fr.emse.majeureinfo.springbootintro.model.Room;
 
 public class BuildingDto {
 
-    private final Long id;
+    //private final Long id;
     private final Long buildingid;
     private final RoomDto room;
 
 
     public BuildingDto(Building building) {
-        this.id = building.getId();
+        //this.id = building.getId();
         this.buildingid = building.getBuildingId();
         this.room = new RoomDto(building.getRoom());
     }
 
-    public Long getId() {
+    /*public Long getId() {
         return id;
-    }
+    }*/
     public Long getBuildingId() {
         return buildingid;
     }
