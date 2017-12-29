@@ -39,6 +39,22 @@ public class Building {
         this.nom = nom;
     }
 
+    public void switchAllOn() {
+
+        for (int i = 0 ; i < this.rooms.size() ; i ++){
+
+            this.rooms.get(i).switchOn();
+        }
+    }
+
+    public void switchAllOff() {
+
+        for (int i = 0 ; i < this.rooms.size() ; i ++){
+
+            this.rooms.get(i).switchOff();
+        }
+    }
+
     public Long getBuildingId() {
         return this.buildingid;
     }
