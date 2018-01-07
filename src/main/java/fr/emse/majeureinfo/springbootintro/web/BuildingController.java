@@ -127,4 +127,10 @@ public class BuildingController {
         switchAllLOff();
         return switchAllROff();
     }
+
+    /* Pour compter les rooms d'un building */
+    @GetMapping(value = "/{buildingId}/count")
+    public int countRooms(@PathVariable long buildingId) {
+        return buildingDao.findOne(buildingId).getRooms().size() ; // On compte le nombre de rooms dans le building
+    }
 }

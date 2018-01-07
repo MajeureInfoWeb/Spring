@@ -15,11 +15,13 @@ public class BuildingDaoImpl implements BuildingDaoCustom {
     @Override
     // Fonction pour récupérer un Building avec son Id.
     // La requête fonctionne comme pour les lights sauf que cette fois, il y a un paramètre, l'Id du Building
-    // Mais en fait je ne me sers jamais de ça vu que j'ai findOne
+    // Il se trouve qu'on ne s'en sert jamais, on utilise plutôt findOne
     public List<Building> findBuildingId(long a) {
         String jpql = "select lt from Building lt where lt.buildingid = :value";
         TypedQuery<Building> query = em.createQuery(jpql, Building.class);
         return query.setParameter("value", a)
                 .getResultList();
     }
+
+    // Attention, si on veut rajouter des choses ici, il ne faut pas oublier de le déclarer aussi dans le DaoCustom
 }
