@@ -64,6 +64,27 @@ public class Room {
         }
     }
 
+    public void switchLOn(){
+        light.setStatus((Status.ON));
+    }
+    public void switchLOff(){
+        light.setStatus((Status.OFF));
+    }
+    public void switchROn(){
+        noise.setStatus((Status.ON));
+    }
+    public void switchROff(){
+        noise.setStatus((Status.OFF));
+    }
+    public void switchOn() {
+        switchLOn();
+        switchROn();
+    }
+    public void switchOff() {
+        switchLOff();
+        switchROff();
+    }
+
     /**
      * The Light of a room
      */

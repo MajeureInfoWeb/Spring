@@ -1,33 +1,40 @@
 package fr.emse.majeureinfo.springbootintro.web;
 
 import fr.emse.majeureinfo.springbootintro.model.Building;
-import fr.emse.majeureinfo.springbootintro.model.Light;
-import fr.emse.majeureinfo.springbootintro.model.Noise;
 import fr.emse.majeureinfo.springbootintro.model.Room;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BuildingDto {
 
-    private final Long id;
     private final Long buildingid;
-    private final RoomDto room;
+    private final String nom;
+    private final List<RoomDto> rooms;
+
 
 
     public BuildingDto(Building building) {
-        this.id = building.getId();
         this.buildingid = building.getBuildingId();
-        this.room = new RoomDto(building.getRoom());
+        this.nom = building.getNom();
+        List<Room> maliste = building.getRooms();
+        rooms = new ArrayList<>();
+        for (int i = 0; i < maliste.size(); i++){
+            this.rooms.add(new RoomDto(maliste.get(i)));
+        }
+        // C'est une liste de Dto
     }
 
-    public Long getId() {
-        return id;
-    }
     public Long getBuildingId() {
         return buildingid;
     }
-
-    public RoomDto getRoom() {
-        return room;
+    public List<RoomDto> getRooms() {
+        return rooms;
+    }
+    public String getNom() {
+        return nom;
     }
 
+    /*On ne fait pas de set sur des objet final */
 
 }
