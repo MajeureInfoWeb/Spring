@@ -64,4 +64,18 @@ public class RoomController {
         myRoom.switchLight(); // On switch
         return roomDao.findAll().stream().map(RoomDto::new).collect(Collectors.toList()); // On repasse tout le DTO en retour :)
     }
+
+    @PostMapping(value = "/{roomId}/setLight/{level}")
+    public List<RoomDto> setLight(@PathVariable Long roomId, @PathVariable int level) {
+        Room myRoom = roomDao.findOne(roomId) ; // On récupère la room a changer
+        myRoom.getLight().setLevel(level); // On set la light avec le nouveau paramètre
+        return roomDao.findAll().stream().map(RoomDto::new).collect(Collectors.toList()); // On repasse tout le DTO en retour :)
+    }
+
+    @PostMapping(value = "/{roomId}/setNoise/{level}")
+    public List<RoomDto> setNoise(@PathVariable Long roomId, @PathVariable int level) {
+        Room myRoom = roomDao.findOne(roomId) ; // On récupère la room a changer
+        myRoom.getNoise().setLevel(level); // On set le Noise avec le nouveau paramètre
+        return roomDao.findAll().stream().map(RoomDto::new).collect(Collectors.toList()); // On repasse tout le DTO en retour :)
+    }
 }
